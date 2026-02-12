@@ -37,7 +37,7 @@ const DonateSection = () =>
           <img
 
           alt="GCash QR Code"
-          className="w-56 h-auto mx-auto rounded-lg mb-4" src="/lovable-uploads/57230e92-2325-4b1e-89e2-f32e0c68d8a2.jpg" />
+          className="w-56 h-auto mx-auto rounded-lg mb-4" src="/lovable-uploads/321f4d4a-7f8f-4049-8bea-e1630753c527.jpg" />
 
           <p className="text-sm text-muted-foreground mb-1">Account Name</p>
           <p className="font-semibold text-foreground font-sans mb-3">Earl Lawrence Obguia</p>
