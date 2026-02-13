@@ -18,13 +18,13 @@ const days = [
     day: "Day 3",
     icon: Sparkles,
     title: "Tech & Adventure",
-    items: ["Breakfast", "Company Visit 4", "Lunch", "Enchanted Kingdom", "Dinner", "Overnight"],
+    items: ["Breakfast", "Company Visit 4", "Lunch", "Dinner", "Overnight"],
   },
   {
     day: "Day 4",
     icon: Building2,
     title: "MNL → DVO",
-    items: ["Breakfast", "Hotel Check-out", "Company Visit 5", "Lunch", "Free & Easy Shopping", "Dinner", "MNL → DVO"],
+    items: ["Breakfast", "Hotel Check-out", "Company Visit 5", "Lunch", "Dinner", "MNL → DVO"],
   },
 ];
 
