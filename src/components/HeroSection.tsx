@@ -66,7 +66,7 @@ const HeroSection = () => {
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5">
             <Calendar className="w-5 h-5 text-secondary" />
-            <span className="text-sm font-medium">May 2026</span>
+            <span className="text-sm font-medium">May 5-8, 2026</span>
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5">
             <MapPin className="w-5 h-5 text-secondary" />
