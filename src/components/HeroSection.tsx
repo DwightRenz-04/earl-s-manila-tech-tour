@@ -1,9 +1,37 @@
 import { motion } from "framer-motion";
 import { MapPin, Calendar, GraduationCap } from "lucide-react";
+import { useState, useEffect } from "react";
 import manilaImg from "@/assets/manila-skyline.jpg";
 import earlImg from "@/assets/earl-formal.jpg";
 
+const useCountdown = (targetDate: Date) => {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const diff = targetDate.getTime() - Date.now();
+    return diff > 0 ? diff : 0;
+  });
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const id = setInterval(() => {
+      const diff = targetDate.getTime() - Date.now();
+      setTimeLeft(diff > 0 ? diff : 0);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [targetDate, timeLeft]);
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
+
+  return { days, hours, minutes, seconds, isExpired: timeLeft <= 0 };
+};
+
 const HeroSection = () => {
+  const { days, hours, minutes, seconds, isExpired } = useCountdown(
+    new Date("2026-05-05T00:00:00+08:00")
+  );
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       <div
@@ -87,6 +115,34 @@ const HeroSection = () => {
             Support My Journey
           </a>
         </motion.div>
+
+        {!isExpired && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+            className="mt-8 flex justify-center gap-4"
+          >
+            {[
+              { value: days, label: "Days" },
+              { value: hours, label: "Hours" },
+              { value: minutes, label: "Minutes" },
+              { value: seconds, label: "Seconds" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 min-w-[72px] text-center"
+              >
+                <span className="block text-2xl md:text-3xl font-bold text-secondary tabular-nums">
+                  {String(value).padStart(2, "0")}
+                </span>
+                <span className="text-xs text-primary-foreground/70 uppercase tracking-wider">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );
