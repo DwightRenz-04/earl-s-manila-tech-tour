@@ -121,8 +121,15 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.6 }}
-            className="mt-8 flex justify-center gap-4"
+            className="mt-8"
           >
+            <h3 className="text-lg font-semibold text-secondary mb-1">
+              Time Until the Educational Tour
+            </h3>
+            <p className="text-sm text-primary-foreground/70 mb-4 max-w-md mx-auto">
+              The countdown to an unforgettable experience in Manila. Every moment brings us closer to the adventure.
+            </p>
+            <div className="flex justify-center gap-4">
             {[
               { value: days, label: "Days" },
               { value: hours, label: "Hours" },
@@ -141,6 +148,7 @@ const HeroSection = () => {
                 </span>
               </div>
             ))}
+            </div>
           </motion.div>
         )}
       </div>
