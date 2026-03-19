@@ -1,9 +1,37 @@
 import { motion } from "framer-motion";
 import { MapPin, Calendar, GraduationCap } from "lucide-react";
+import { useState, useEffect } from "react";
 import manilaImg from "@/assets/manila-skyline.jpg";
 import earlImg from "@/assets/earl-formal.jpg";
 
+const useCountdown = (targetDate: Date) => {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const diff = targetDate.getTime() - Date.now();
+    return diff > 0 ? diff : 0;
+  });
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const id = setInterval(() => {
+      const diff = targetDate.getTime() - Date.now();
+      setTimeLeft(diff > 0 ? diff : 0);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [targetDate, timeLeft]);
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
+
+  return { days, hours, minutes, seconds, isExpired: timeLeft <= 0 };
+};
+
 const HeroSection = () => {
+  const { days, hours, minutes, seconds, isExpired } = useCountdown(
+    new Date("2026-05-05T00:00:00+08:00")
+  );
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       <div
