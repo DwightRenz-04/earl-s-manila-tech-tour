@@ -115,9 +115,31 @@ const HeroSection = () => {
             Support My Journey
           </a>
         </motion.div>
-      </div>
-    </section>
-  );
-};
 
-export default HeroSection;
+        {!isExpired && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+            className="mt-8 flex justify-center gap-4"
+          >
+            {[
+              { value: days, label: "Days" },
+              { value: hours, label: "Hours" },
+              { value: minutes, label: "Minutes" },
+              { value: seconds, label: "Seconds" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 min-w-[72px] text-center"
+              >
+                <span className="block text-2xl md:text-3xl font-bold text-secondary tabular-nums">
+                  {String(value).padStart(2, "0")}
+                </span>
+                <span className="text-xs text-primary-foreground/70 uppercase tracking-wider">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        )}
